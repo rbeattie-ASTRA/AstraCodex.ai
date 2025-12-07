@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>AstraCodex.ai — Coming Soon</title>
   <meta name="description" content="AI Coding Consultancy — Making AI Work for Everyone." />
 
@@ -10,25 +10,33 @@
     :root{
       --bg:#0b0f1a;
       --panel:#141414;
-      --text:#ffffff;       /* ASTRA in white */
-      --muted:#bbbbbb;      /* softer muted gray */
-      --neon1:#ff9933;      /* muted neon orange */
-      --neon2:#ff884d;      /* softer orange gradient */
-      --neon3:#ff6600;      /* core neon orange */
-      --accent:#ff7f50;     /* coral‑orange accent */
+      --text:#ffffff;
+      --muted:#bbbbbb;
+      --neon1:#ff9933;
+      --neon2:#ff884d;
+      --neon3:#ff6600;
+      --accent:#ff7f50;
     }
     * { box-sizing:border-box }
-    html, body { height:100% }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color:var(--text);
-      background: linear-gradient(180deg, #0a0e19 0%, var(--bg) 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-    }
+
+    body {
+  	margin:0;
+  	font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  	color:var(--text);
+  	background: linear-gradient(180deg, #0a0e19 0%, var(--bg) 100%);
+  
+  	/* Allow scroll if needed */
+ 	 min-height:100svh;
+  	display:flex;
+  	justify-content:center;
+ 	 align-items:flex-start; /* <-- change from center to flex-start */
+
+	  /* Safe-area padding */
+	  padding-top: calc(env(safe-area-inset-top) + 32px);
+	  padding-bottom: calc(env(safe-area-inset-bottom) + 32px);
+	  padding-left: calc(env(safe-area-inset-left) + 32px);
+	  padding-right: calc(env(safe-area-inset-right) + 32px);
+     }	
 
     .card{
       width:100%;
@@ -41,11 +49,17 @@
         0 20px 60px rgba(0,0,0,.6);
       border-radius:16px;
       backdrop-filter:saturate(1.1) blur(6px);
+      -webkit-backdrop-filter:saturate(1.1) blur(6px);
       overflow:hidden;
+
+      display:flex;
+      flex-direction:column; /* prevent strip stretching */
+      margin-top:20px; /* <-- add this line */
     }
 
     .strip{
       height:6px;
+      flex-shrink:0; /* lock strip height */
       background:linear-gradient(90deg, var(--neon2), var(--neon1), var(--neon3), var(--accent));
       filter:saturate(1.1);
     }
@@ -60,23 +74,13 @@
       box-shadow: 0 0 12px rgba(255,153,51,.5), 0 0 24px rgba(255,102,0,.25) inset;
       border:1px solid rgba(255,255,255,.15);
     }
-    .title{
-      font-weight:800; letter-spacing:.4px; font-size:1.25rem;
-      text-shadow: 0 0 8px rgba(255,102,0,.35);
-    }
-    .title .astra{ color:var(--text); }       /* ASTRA in white */
-    .title .codex{ color:var(--neon3); }      /* CODEX.ai in neon orange */
+    .title{ font-weight:800; letter-spacing:.4px; font-size:1.25rem; text-shadow: 0 0 8px rgba(255,102,0,.35); }
+    .title .astra{ color:var(--text); }
+    .title .codex{ color:var(--neon3); }
     .tagline{ color:var(--muted); margin-top:2px; font-size:.95rem; }
 
-    .hero{
-      margin-top:12px; padding:16px; border:1px dashed rgba(255,153,51,.35); border-radius:12px;
-      background:linear-gradient(180deg, rgba(255,153,51,.08), rgba(255,102,0,.06));
-    }
-    .hero h1{
-      margin:0 0 8px; font-size:1.6rem; line-height:1.2;
-      color:var(--neon3);
-      text-shadow:0 0 10px rgba(255,153,51,.3);
-    }
+    .hero{ margin-top:12px; padding:16px; border:1px dashed rgba(255,153,51,.35); border-radius:12px; background:linear-gradient(180deg, rgba(255,153,51,.08), rgba(255,102,0,.06)); }
+    .hero h1{ margin:0 0 8px; font-size:1.6rem; line-height:1.2; color:var(--neon3); text-shadow:0 0 10px rgba(255,153,51,.3); }
     .hero p{ margin:0; color:var(--muted) }
 
     .cta{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin:22px 0 10px; }
@@ -132,12 +136,8 @@
       </section>
 
       <div class="cta">
-        <a class="btn" href="mailto:contact@astracodex.ai" aria-label="Email AstraCodex.ai to book a consultation">
-          Book a consultation <span aria-hidden="true">↗</span>
-        </a>
-        <a class="btn" href="#" aria-label="Subscribe for launch updates">
-          Get launch updates <span aria-hidden="true">★</span>
-        </a>
+        <a class="btn" href="mailto:contact@astracodex.ai">Book a consultation ↗</a>
+        <a class="btn" href="#">Get launch updates ★</a>
       </div>
 
       <section class="grid" aria-label="Preview of services">
@@ -152,7 +152,7 @@
         <div class="panel">
           <h2>Accessibility solutions</h2>
           <ul class="list">
-            <li>Voice interfaces & speech-to-text integration</li>
+            <li>Voice interfaces &amp; speech-to-text integration</li>
             <li>Vision support tools and alt-first design</li>
             <li>Inclusive, accessible workflows</li>
           </ul>
